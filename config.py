@@ -1,0 +1,25 @@
+import cv2
+import os
+
+# YOLO
+MODEL_NAME = 'yolov8s.pt'
+PERSON_CLASS_ID = 0
+CONFIDENCE_THRESHOLD = 0.5
+
+# Face Recognition
+KNOWN_FACES_DIR = 'know_faces'
+
+# Video
+CAMERA_ID = 0
+FRAME_WIDTH = 640
+FRAME_HEIGHT = 480
+
+# Visualization
+FONT = cv2.FONT_HERSHEY_DUPLEX
+FONT_SCALE = 1.0
+FONT_THICKNESS = 1
+BOX_COLOR = (0, 0, 255)
+TEXT_BG_COLOR = (0, 0, 255)
+TEXT_COLOR = (255, 255, 255)
+TEXT_PADDING = 6
+TEXT_BOX_HEIGHT = 35
