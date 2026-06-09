@@ -9,14 +9,25 @@ known_face_names = []
 def load_known_faces():
     known_face_encodings.clear()
     known_face_names.clear()
-    for filename in os.listdir(config.KNOWN_FACES_DIR):
-        if filename.endswith(('.jpg', '.jpeg', '.png', '.webp')):
-            image_path = os.path.join(config.KNOWN_FACES_DIR, filename)
-            image = face_recognition.load_image_file(image_path)
+
+    for entry in sorted(os.listdir(config.KNOWN_FACES_DIR)):
+        entry_path = os.path.join(config.KNOWN_FACES_DIR, entry)
+        if os.path.isdir(entry_path):
+            name = entry
+            for filename in sorted(os.listdir(entry_path)):
+                if filename.endswith(('.jpg', '.jpeg', '.png', '.webp')):
+                    image_path = os.path.join(entry_path, filename)
+                    image = face_recognition.load_image_file(image_path)
+                    face_encodings = face_recognition.face_encodings(image)
+                    if face_encodings:
+                        known_face_encodings.append(face_encodings[0])
+                        known_face_names.append(name)
+        elif entry.endswith(('.jpg', '.jpeg', '.png', '.webp')):
+            image = face_recognition.load_image_file(entry_path)
             face_encodings = face_recognition.face_encodings(image)
             if face_encodings:
                 known_face_encodings.append(face_encodings[0])
-                name = os.path.splitext(filename)[0]
+                name = os.path.splitext(entry)[0]
                 known_face_names.append(name)
 
 def recognize_faces(frame):
