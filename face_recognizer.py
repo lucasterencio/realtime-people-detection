@@ -11,6 +11,8 @@ def load_known_faces():
     known_face_names.clear()
 
     for entry in sorted(os.listdir(config.KNOWN_FACES_DIR)):
+        if entry.startswith('.'):
+            continue
         entry_path = os.path.join(config.KNOWN_FACES_DIR, entry)
         if os.path.isdir(entry_path):
             name = entry

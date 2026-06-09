@@ -2,3 +2,5 @@ ultralytics
 opencv-python
 face_recognition
 numpy
+matplotlib
+Pillow
